@@ -17,6 +17,7 @@ namespace MiniShop
 
 
         public int ID { get { return id; }  }
+        public string Name { get { return name; }  }
         public double Price { get { return price; }  }
 
         /// <summary>

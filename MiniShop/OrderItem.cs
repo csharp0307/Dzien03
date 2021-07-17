@@ -16,6 +16,7 @@ namespace MiniShop
 
         public int ProductID { get { return product.ID; } }
         public double ProductPrice { get { return product.Price; } }
+        public string ProductName { get { return product.Name; } }
         public int Qnty { get { return qnty; } }
 
         public OrderItem(Product product, int qnty)

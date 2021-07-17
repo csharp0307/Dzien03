@@ -82,6 +82,26 @@ namespace MiniShop
 
         }
 
+        public bool Clear()
+        {
+            if (status==OrderStatus.NewOrder)
+            {
+                items.Clear();
+                return true;
+            }
+            return false;
+        }
+
+        public void Print()
+        {
+            Console.WriteLine("Szczegóły zamówienia");
+            foreach (var item in items)
+            {
+                Console.WriteLine("{0}|{1}|{2}|{3}",
+                    item.ProductName, item.Qnty, item.ProductPrice, item.ProductPrice*item.Qnty);
+            }
+            Console.WriteLine("Do zapłaty: {0}", CalcTotalAmount() );
+        }
 
         public double CalcTotalAmount()
         {
