@@ -15,11 +15,18 @@ namespace MiniShop
         private int qnty;
 
         public int ProductID { get { return product.ID; } }
+        public double ProductPrice { get { return product.Price; } }
+        public int Qnty { get { return qnty; } }
 
         public OrderItem(Product product, int qnty)
         {
             this.product = product;
             this.qnty = qnty;
+        }
+
+        public void UpdateQnty(int n)
+        {
+            qnty += n;
         }
     }
 }

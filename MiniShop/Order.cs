@@ -50,9 +50,53 @@ namespace MiniShop
             if (!(product!=null && qnty>0 && status==OrderStatus.NewOrder))
                 return false;
 
-
+            int productIndex = GetProductIndex(product);
+            if (productIndex==-1)
+            {
+                items.Add(new OrderItem(product, qnty));
+            } else
+            {
+                items[productIndex].UpdateQnty(qnty);
+            }
 
             return true;
+        }
+
+        public bool RemoveProduct(Product product, int qnty=0)
+        {
+            if (!(product != null && qnty >= 0 && status == OrderStatus.NewOrder))
+                return false;
+
+            int productIndex = GetProductIndex(product);
+            if (productIndex == -1 || qnty > items[productIndex].Qnty)
+                return false;
+
+            if (qnty==0 || qnty== items[productIndex].Qnty)
+            {
+                items.RemoveAt(productIndex);
+                return true;
+            }
+
+            items[productIndex].UpdateQnty(-qnty); // (-1)*qnty
+            return true;
+
+        }
+
+
+        public double CalcTotalAmount()
+        {
+            double total = 0;
+            foreach (var item in items)
+            {
+                total += item.Qnty * item.ProductPrice; 
+            }
+
+            // zastosowanie dyskontu
+            if (discount>0 && discount<100)
+            {
+                total *=  (100 - discount) / 100.0;
+            }
+            return total;
         }
 
     }

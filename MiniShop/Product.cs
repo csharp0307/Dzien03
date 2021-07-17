@@ -17,6 +17,7 @@ namespace MiniShop
 
 
         public int ID { get { return id; }  }
+        public double Price { get { return price; }  }
 
         /// <summary>
         /// Konstruktor klasy Product
