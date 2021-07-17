@@ -22,15 +22,19 @@ namespace MiniShop
             order.AddProduct(prMaka, 2);
             order.AddProduct(prPapier, 3);
 
-            order.RemoveProduct(prPapier, 1);
-            order.RemoveProduct(prMaka, 5);
-            order.RemoveProduct(prRyz);
-
             order.AddProduct(prRyz, 2);
             order.AddProduct(prMaka, 3);
             order.AddProduct(prPapier, 4);
 
-            Console.WriteLine(order.CalcTotalAmount());
+            order.Print();
+
+            order.RemoveProduct(prPapier, 1);
+            order.RemoveProduct(prMaka, 5);
+            order.RemoveProduct(prRyz);
+
+
+
+            //Console.WriteLine(order.CalcTotalAmount());
             Console.ReadKey();
 
         }

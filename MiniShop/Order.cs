@@ -50,7 +50,8 @@ namespace MiniShop
             if (!(product!=null && qnty>0 && status==OrderStatus.NewOrder))
                 return false;
 
-            int productIndex = GetProductIndex(product);
+            //int productIndex = GetProductIndex(product);
+            int productIndex = items.FindIndex(x => x.ProductID == product.ID);
             if (productIndex==-1)
             {
                 items.Add(new OrderItem(product, qnty));
@@ -67,7 +68,8 @@ namespace MiniShop
             if (!(product != null && qnty >= 0 && status == OrderStatus.NewOrder))
                 return false;
 
-            int productIndex = GetProductIndex(product);
+            //int productIndex = GetProductIndex(product);
+            int productIndex = items.FindIndex(x => x.ProductID == product.ID);
             if (productIndex == -1 || qnty > items[productIndex].Qnty)
                 return false;
 
@@ -97,7 +99,7 @@ namespace MiniShop
             Console.WriteLine("Szczegóły zamówienia");
             foreach (var item in items)
             {
-                Console.WriteLine("{0}|{1}|{2}|{3}",
+                Console.WriteLine("{0,-40}|{1,10}|{2,10:0.00}|{3,12:0.00}",
                     item.ProductName, item.Qnty, item.ProductPrice, item.ProductPrice*item.Qnty);
             }
             Console.WriteLine("Do zapłaty: {0}", CalcTotalAmount() );
@@ -106,10 +108,14 @@ namespace MiniShop
         public double CalcTotalAmount()
         {
             double total = 0;
-            foreach (var item in items)
+            double totalQnty = 0;
+            /*foreach (var item in items)
             {
                 total += item.Qnty * item.ProductPrice; 
-            }
+            }*/
+
+            items.ForEach(item => { total += item.Qnty * item.ProductPrice; 
+                totalQnty += item.Qnty;  });
 
             // zastosowanie dyskontu
             if (discount>0 && discount<100)
